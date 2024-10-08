@@ -21,25 +21,25 @@ spec:
         - name: PGUSER
           valueFrom:
             secretKeyRef:
-              name: pg-secret
+              name: secret
               key: PGUSER
         - name: PGHOST
           value: postgres-service
         - name: PGDATABASE
           valueFrom:
             secretKeyRef:
-              name: pg-secret
+              name: secret
               key: PGDATABASE
         - name: PGPASSWORD
           valueFrom:
             secretKeyRef:
-              name: pg-secret
+              name: secret
               key: PGPASSWORD
         - name: REDIS_HOST
           value: redis-service
         - name: REDIS_PASSWORD
           valueFrom:
             secretKeyRef:
-              name: redis-secret
+              name: secret
               key: REDIS_PASSWORD
 

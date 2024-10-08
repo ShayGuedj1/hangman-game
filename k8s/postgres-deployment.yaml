@@ -19,30 +19,17 @@ spec:
         - name: POSTGRES_USER
           valueFrom:
             secretKeyRef:
-              name: pg-secret
+              name: secret
               key: PGUSER
         - name: POSTGRES_PASSWORD
           valueFrom:
             secretKeyRef:
-              name: pg-secret
+              name: secret
               key: PGPASSWORD
         - name: POSTGRES_DB
           valueFrom:
             secretKeyRef:
-              name: pg-secret
+              name: secret
               key: PGDATABASE
         ports:
         - containerPort: 5432
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: postgres-service
-spec:
-  selector:
-    app: postgres
-  ports:
-    - protocol: TCP
-      port: 5432
-      targetPort: 5432
-
