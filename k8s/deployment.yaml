@@ -1,0 +1,45 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hangman-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: hangman-app
+  template:
+    metadata:
+      labels:
+        app: hangman-app
+    spec:
+      containers:
+      - name: hangman-app
+        image: sharagon1/hangman-game:latest
+        ports:
+        - containerPort: 3000
+        env:
+        - name: PGUSER
+          valueFrom:
+            secretKeyRef:
+              name: pg-secret
+              key: PGUSER
+        - name: PGHOST
+          value: postgres-service
+        - name: PGDATABASE
+          valueFrom:
+            secretKeyRef:
+              name: pg-secret
+              key: PGDATABASE
+        - name: PGPASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: pg-secret
+              key: PGPASSWORD
+        - name: REDIS_HOST
+          value: redis-service
+        - name: REDIS_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: redis-secret
+              key: REDIS_PASSWORD
+
